@@ -3,6 +3,152 @@
     margin: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: rgb(241, 243, 255);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+/* ----------------------------------------------------- */
+
+.header{
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    width: 80%;
+    min-height: 80px;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1{
+    font-size: 37px;
+    color: rgb(6, 69, 206);
+
+}
+
+.add-card-btn{
+    outline: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    padding: 15px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 700;
+
+    background-color: rgb(37, 99, 234);
+    color: white;
+    transition: .3s ease;
+}
+.add-card-btn:hover{
+    background-color: rgb(29, 78, 216);
+    transform: scale(1.05);
+}
+.add-card-btn i{
+    font-weight: 100;
+    font-size: 25px;
+}
+
+/* SEARCH & FILTER SECTION */
+/* SEARCH & FILTER SECTION */
+/* SEARCH & FILTER SECTION */
+
+.search-filter-cont{
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    margin-bottom: 50px;
+    width: 80%;
+    min-height: 80px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-cont, .filter-cont{
+    /* background-color: lightblue; */
+    height: 50px;
+    width: 49%;
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.search-cont input, .filter-cont select{
+    outline: none;
+    border: 2px solid rgb(169, 169, 169);
+    background: white;
+    padding: 15px;
+    padding-left: 40px;
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    appearance: none;
+    font-size: 15px;
+}
+.search-cont input:focus, .filter-cont select:focus{
+    border: 2px solid rgb(0, 72, 241);
+}
+.search-cont i{
+    position: absolute;
+    top: 14px;
+    left: 10px;
+    font-size: 17px;
+    color: rgb(161, 161, 161);
+}
+.tag-icon{
+    position: absolute;
+    top: 18px;
+    left: 12px;
+
+    font-size: 17px;
+    color: rgb(161, 161, 161);
+}
+.arrow-icon{
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    font-size: 22px;
+    color: rgb(161, 161, 161);
+}
+
+
+.no-cards-msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    gap: 10px;
+    color: rgb(161, 161, 161);
+    /* background-color: lightblue; */
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
