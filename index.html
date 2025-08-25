@@ -67,8 +67,42 @@
                     <input type="text" id="card-title" required>
                 </div>
                 <div>
-                    <label for="">Title <span class="red-star">*</span></label>
-                    <input type="text" id="card-title" required>
+                    <label for="">Description <span class="red-star">*</span></label>
+                    <textarea id="card-description" required></textarea>
+                </div>
+                <div>
+                    <label for="">Date</label>
+                    <input type="date" id="card-date">
+                </div>
+                <div>
+                    <label for="">Category</label>
+                    <div id="category-chkbox-cont" class="category-chkbox-cont">
+                        <label for=""> 
+                            <input type="checkbox">
+                            <span>Work</span>
+                        </label>
+                        <label for="">
+                            <input type="checkbox">
+                            <span>Urgent</span>
+                        </label>
+                        <label for="">
+                            <input type="checkbox">
+                            <span>Personal</span>
+                        </label>
+                        <label for="">
+                            <input type="checkbox">
+                            <span>Fun</span>
+                        </label>
+                        <label for="">
+                            <input type="checkbox">
+                            <span>Idea</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-btns-cont">
+                    <button id="cancel-card-btn">Cancel</button>
+                    <button id="save-card-btn"><i class="ri-checkbox-circle-fill"></i> Done</button>
                 </div>
             </form>
         </div>
