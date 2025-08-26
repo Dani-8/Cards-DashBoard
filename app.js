@@ -42,7 +42,24 @@ function renderCards(){
         let cardElement = document.createElement("div")
         cardElement.classList.add("card-element")
 
+        // Date Format For Display
+        let formattedDate = card.DateTime
+        ? new Date(card.dateTime).toLocaleString("en-US", {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+        })
+        : "No date Set"
     })
+
+    
+
+
+
+
+
+
+
 
 }
 
