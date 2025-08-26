@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -29,7 +28,7 @@
 
         <div class="filter-cont">
             <i class="fas fa-tags tag-icon"></i>
-            <select id="filter-select">
+            <select id="filter-select" class="">
                 <option value="all">All Cards</option>
                 <option value="active">Active Cards</option>
                 <option value="inactive">Inactive Cards</option>
@@ -57,24 +56,24 @@
     
 
     <!-- MODAL FOR ADDING/EDITING CARD -->
-    <div class="modal-cont" id="modal-cont">
+    <div class="modal-cont hidden" id="modal-cont">
         <div class="modal-content">
             <h2>Create New Card</h2>
 
             <form action="">
-                <div>
+                <div class="form-element">
                     <label for="">Title <span class="red-star">*</span></label>
                     <input type="text" id="card-title" required>
                 </div>
-                <div>
+                <div class="form-element">
                     <label for="">Description <span class="red-star">*</span></label>
                     <textarea id="card-description" required></textarea>
                 </div>
-                <div>
+                <div class="form-element">
                     <label for="">Date</label>
                     <input type="date" id="card-date">
                 </div>
-                <div>
+                <div class="form-element">
                     <label for="">Category</label>
                     <div id="category-chkbox-cont" class="category-chkbox-cont">
                         <label for=""> 
@@ -101,8 +100,8 @@
                 </div>
 
                 <div class="modal-btns-cont">
-                    <button id="cancel-card-btn">Cancel</button>
-                    <button id="save-card-btn"><i class="ri-checkbox-circle-fill"></i> Done</button>
+                    <button id="cancel-card-btn" class="cancel-card-btn">Cancel</button>
+                    <button id="save-card-btn" class="save-card-btn"><i class="ri-checkbox-circle-fill"></i> Done</button>
                 </div>
             </form>
         </div>
@@ -113,8 +112,7 @@
 
 
 
-
-
+    
     <script src="app.js"></script>
 </body>
 </html>
