@@ -146,7 +146,7 @@ body{
 
 
 /* MODAL */
-.modal-cont{
+.modal-cont, .confirmation-modal{
     background-color: rgba(0, 0, 0, 0.4);
     position: fixed;
     top: 0;
@@ -161,7 +161,7 @@ body{
 .hidden{
     display: none;
 }
-.modal-content{
+.modal-content, .confirmation-modal-content{
     background-color: white;
     border-radius: 12px;
     padding: 30px;
@@ -219,7 +219,7 @@ body{
     gap: 10px;
     margin-top: 25px;
 }
-.modal-btns-cont > button{
+.modal-btns-cont, .confirmation-modal-btns-cont > button{
     padding: 15px 25px;
     font-size: 16px;
     border: none;
@@ -228,11 +228,11 @@ body{
     transition: .3s ease;
 }
 
-.cancel-card-btn{
+.cancel-card-btn, .cancel-delete-btn{
     background-color: rgb(225, 225, 225);
     color: black;
 }
-.cancel-card-btn:hover{
+.cancel-card-btn:hover, .cancel-delete-btn:hover{
     background-color: rgb(176, 174, 174);
 }
 .save-card-btn{
@@ -242,9 +242,21 @@ body{
 .save-card-btn:hover{
     background-color: rgb(11, 71, 190);
 }
+.confirm-delete-btn{
+    color: white;
+    background-color: rgb(249, 69, 63);
+}
+.confirm-delete-btn:hover{
+    background-color: rgb(229, 5, 5);
+}
 
 
 
 
 
-
+.confirmation-modal-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
