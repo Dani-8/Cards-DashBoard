@@ -1,6 +1,6 @@
 let addCardBtn = document.getElementById("add-card-btn")
 
-let cardContainer = document.getElementById("card-cont")
+let cardsContainer = document.getElementById("card-cont")
 let noCardMsg = document.getElementById("no-cards-msg")
 let cardForm = document.getElementById("card-form")
 let cardTitle = document.getElementById("card-title")
@@ -14,7 +14,13 @@ let saveCardBtn = document.getElementById("save-card-btn")
 // MODAL
 let modal = document.getElementById("modal-cont")
 let modalTitle = document.getElementById("modal-title")
-let cards =[]
+
+// CONFIRMATION MODAL
+let confirmationModal = document.getElementById("confirmation-modal")
+let confirmDeleteBtn = document.getElementById("confirm-delete-btn")
+let cancelDeleteBtn = document.getElementById("cancel-delete-btn")
+
+let cards = []
 // let addCardBtn = document.getElementById("add-card-btn")
 
 
@@ -25,29 +31,68 @@ let cards =[]
 
 
 //EVENT LISTENER
+document.addEventListener('DOMContentLoaded', renderCards);
 
-// addCardBtn.addEventListener("click", 
+addCardBtn.addEventListener("click", () => openModal());
+cancelCardBtn.addEventListener("click", closeModal)
 
-saveCardBtn.addEventListener("click", e => {
+modal.addEventListener("click", e => {
+    if (e.target === modal) {
+        closeModal()
+    }
+})
 
-    let name = cardTitle.value.trim()
+cardForm.addEventListener("submit", e => {
+    e.preventDefault()
+
+    // Get form values
+    let title = cardTitle.value.trim()
     let desc = cardDesc.value.trim()
     let date = cardDate.value
     let selectedCategories = Array.from(categoryCheckBoxCont.querySelectorAll("input[type=checkbox]:checked")).map(checkbox => checkbox.value)
 
-    let newCard = {
-        id: index,
-        name,
-        desc,
-        date,
-        categories:selectedCategories 
-    }
 
-    cards.unshift(newCard)
+    if(editingCardIndex !== null){
+        cards[editingCardIndex] = {
+            ...cards[editingCardIndex],
+            title,
+            desc,
+            date,
+            categories:selectedCategories
+        }
+    }else{
+        newCard = {
+            title,
+            desc,
+            date,
+            categories:selectedCategories,
+            createdAt: new Date().toISOString()
+        }
+        cards.unshift(newCard)
+    }
+    
+    renderCards()
+    closeModal()
 
 })
 
 
+
+
+// DELETE CONFIRMATION MODAL
+confirmationModal.addEventListener("click", e => {
+    if (e.target === confirmationModal) {
+        closeConfirmationModal()
+    }
+})
+
+cancelDeleteBtn.addEventListener("click", closeConfirmationModal)
+
+confirmDeleteBtn.addEventListener("click", () => {
+    if (cardToDeleteIndex !== null) {
+        deleteCard(cardToDeleteIndex)
+    }
+})
 
 
 
@@ -59,80 +104,65 @@ saveCardBtn.addEventListener("click", e => {
  */
 
 function renderCards(){
-    cardContainer.innerHTML = ""
+    cardsContainer.innerHTML = "";
 
-    if(cards.lenght > 0 ){
-        noCardMsg.classList.remove("hidden")
-    }else{
-        noCardMsg.classList.add("hidden")
+    if (cards.length === 0) {
+        noCardMsg.classList.remove("hidden");
+    } else {
+        noCardMsg.classList.add("hidden");
     }
 
-
-
-    // LOOP THROUGH EACH CARDS-----CREATE HTML ELEMENT FOR EACH
     cards.forEach((card, index) => {
-        let cardElement = document.createElement("div")
-        cardElement.classList.add("card-element")
-        cardElement.dataset.index = index
+        let cardElement = document.createElement("div");
+        cardElement.classList.add("card-element");
+        cardElement.dataset.index = index;
 
+        let formattedDate = card.date
+            ? new Date(card.date).toLocaleString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric"
+            })
+            : "No date Set";
 
-        // Date Format For Display
-        let formattedDate = card.DateTime
-        ? new Date(card.dateTime).toLocaleString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric"
-        })
-        : "No date Set"
-
-
-        /**
-         * Badge Colors for Categories
-         */
-        // Classes for Categories in Object
         let badgeColors = {
             Work: 'work-badge',
             Personal: 'personal-badge',
             Urgent: 'urgent-badge',
-            Ideas: 'ideas-badge'
-        }
+            Ideas: 'ideas-badge',
+            Fun: 'fun-badge'
+        };
 
-        // THOSE SELECTED CATEGORIES GET THEIR CLASS HERE!!!
         let categoryBadges = card.categories.map(cat => {
-            let badgeClass = badgeColors[cat] || "default-badge"
+            let badgeClass = badgeColors[cat] || "default-badge";
+            return `<span class="${badgeClass}">${cat}</span>`;
+        }).join("");
 
-            return `<span class="${badgeClass}">${cat}</span>`
-        }).join("")
-
-
-
-        // BUILD THE CARD ELEMENT
         cardElement.innerHTML = `
-            <div class="card-element">
-            <h2>${card.name}</h2>
-            <p>${card.desc}</p>
-            <div class="category-badge">${categoryBadges}</div>
-            <p><i class="far fa-calendar-alt mr-1"></i>${formattedDate}</p>
-            <div class="card-element-btns-cont">
-                <button class="edit-btn"><i class="fas fa-edit"></i>Edit</button>
-                <button class="delete-btn"><i class="fas fa-trash-alt"></i>Delete</button>
+            <div class="card-content">
+                <h2>${card.title}</h2>
+                <p>${card.desc}</p>
+                <div class="category-badge">${categoryBadges}</div>
+                <p class="date"><i class="far fa-calendar-alt mr-1"></i>${formattedDate}</p>
+                <div class="card-element-btns-cont">
+                    <button class="edit-btn"><i class="fas fa-edit"></i>Edit</button>
+                    <button class="delete-btn"><i class="fas fa-trash-alt"></i>Delete</button>
+                </div>
             </div>
-        </div>
-        `
+        `;
 
+    cardElement.querySelector(".edit-btn").addEventListener("click", () => openModal(index));
+    cardElement.querySelector(".delete-btn").addEventListener("click", () => openConfirmationModal(index));
 
-        cardElement.querySelector(".edit-btn").addEventListener("click", () => openModal(card))
-        cardElement.querySelector(".delete-btn").addEventListener("click", () => openConfirmationModal(card))
+    cardsContainer.appendChild(cardElement);
+    });
 
-
-        cardContainer.appendChild(cardElement)
-    })
 
 }
 
 
 function deleteCard(index){
-    let cardElement = cardContainer.querySelector(`[data-index="${index}"]`)
+    let cardElement = cardsContainer.querySelector(`[data-index="${index}"]`)
 
     if(cardElement){
         // APPLY FADE-OUT ANIMATION BEFORE REMOVE
@@ -142,11 +172,12 @@ function deleteCard(index){
         setTimeout(() => {
             cards.splice(index, 1)
             renderCards()
-
+            closeConfirmationModal()
         }, 300)
     }else{
         cards.splice(index, 1)
         renderCards()
+        closeConfirmationModal()
     }
 }
 
@@ -159,37 +190,38 @@ function deleteCard(index){
 */
 
 function openModal(cardIndex = null){
-    cardForm.reset()
+    cardForm.reset();
 
     // UNCHECK ALL CATEGORIES FIRST
     categoryCheckBoxCont.querySelectorAll("input[type=checkbox]").forEach(checkbox => {
-        checkbox.checked = false
-    })
+        checkbox.checked = false;
+    });
 
-    if(cardIndex !== null){
-        editingCardIndex = cardIndex
-        let cardData = cards[cardIndex]
-        modalTitle.textContent = "Edit Card"
+    if (cardIndex !== null) {
+        editingCardIndex = cardIndex;
+        let cardData = cards[cardIndex];
+        modalTitle.textContent = "Edit Card";
 
-        cardTitle.value = cardData.name
-        cardDesc.value = cardData.desc
-        cardDate.value = cardData.date || ""
+        cardTitle.value = cardData.title;
+        cardDesc.value = cardData.desc;
+        cardDate.value = cardData.date || "";
 
+        // Check the checkboxes that match the categories
         cardData.categories.forEach(cat => {
-            let checkbox = categoryCheckBoxCont.querySelectorAll(`input[type=checkbox][value="${cat}"]`)
-            if(checkbox){
-                checkbox.checked = true
+            let checkbox = categoryCheckBoxCont.querySelector(`input[type=checkbox][value='${cat}']`);
+            if (checkbox) {
+                checkbox.checked = true;
             }
-        })
-    }else{
-        editingCardIndex = null
-        modalTitle.textContent = "Add New Card"
+        });
+    } else {
+        editingCardIndex = null;
+        modalTitle.textContent = "Add New Card";
     }
 
-    modal.classList.remove("hidden")
+    modal.classList.remove("hidden");
     setTimeout(() => {
-        modal.classList.add("modal-active")
-    }, 10)
+        modal.classList.add("modal-active");
+    }, 10);
 }
 
 
@@ -210,6 +242,26 @@ function closeModal(){
 
 
 
+// CONFIRMATION FOR DELETING THE CARD
+function openConfirmationModal(index){
+    cardToDeleteIndex = index
+    confirmationModal.classList.remove("hidden")
+
+    setTimeout(() => {
+        confirmationModal.classList.add("modal-active")
+    }, 10)
+}
+
+
+
+function closeConfirmationModal(){
+    confirmationModal.classList.remove("modal-active")
+
+    setTimeout(() => {
+        confirmationModal.classList.add("hidden")
+        cardToDeleteIndex = null
+    }, 10)
+}
 
 
 

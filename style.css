@@ -173,8 +173,15 @@ body{
     text-align: center;
     font-size: 30px;
 }
-
-
+.modal-content {
+    transform: translateY(-50px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.modal-active .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+}
 .form-element{
     display: flex;
     flex-direction: column;
@@ -219,7 +226,7 @@ body{
     gap: 10px;
     margin-top: 25px;
 }
-.modal-btns-cont, .confirmation-modal-btns-cont > button{
+.modal-btns-cont > button, .confirmation-modal-btns-cont > button{
     padding: 15px 25px;
     font-size: 16px;
     border: none;
@@ -252,7 +259,7 @@ body{
 
 
 
-
+/* CONFIRMATION MODAL */
 
 .confirmation-modal-content{
     display: flex;
@@ -260,3 +267,140 @@ body{
     align-items: center;
     gap: 10px;
 }
+
+
+
+
+
+
+
+/* CARD ELEMENT */
+.card-cont{
+    /* background-color: #0980a1; */
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    align-items: end;
+    width: 80%;
+}
+
+.card-element{
+    background-color: white;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    width: 23%;
+    /* min-height: 200px; */
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card-element:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-50px); }
+}
+
+.card-content p:not(.date){
+    color: rgb(52, 52, 52);
+
+}
+.card-content > h2, p{
+    margin-bottom: 10px;
+}
+
+
+
+.category-badge{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+    width: 100%;
+}
+.category-badge span{
+    /* background-color: red; */
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+
+}
+
+.default-badge { background: #e5e7eb; color: #374151; padding: 4px 8px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+.work-badge { background: #dbeafe; color: #1e40af; }
+.personal-badge { background: #ede9fe; color: #5b21b6; }
+.urgent-badge { background: #fee2e2; color: #991b1b; }
+.ideas-badge { background: #dcfce7; color: #166534; }
+.fun-badge { background: #e1f3ff; color: #0980a1; }
+
+
+
+
+.date{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 15px;
+    color: rgb(107, 107, 107);
+    margin-top: 20px;
+}
+
+
+
+.card-element-btns-cont{
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.card-element-btns-cont button{
+    display: flex;
+    gap: 5px;
+    padding: 10px 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: .3s ease;
+}
+.card-element-btns-cont .edit-btn{
+    background-color: rgb(255, 255, 200);
+    color: rgb(161, 105, 0);
+}
+.card-element-btns-cont .delete-btn{
+    background-color: rgb(255, 180, 180);
+    color: rgb(161, 0, 0);
+}
+.card-element-btns-cont .edit-btn:hover{
+    background-color: rgb(252, 252, 136);
+}
+.card-element-btns-cont .delete-btn:hover{
+    background-color: rgb(255, 149, 149);
+}
+
+
