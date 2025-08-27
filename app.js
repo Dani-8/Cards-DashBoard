@@ -20,8 +20,12 @@ let confirmationModal = document.getElementById("confirmation-modal")
 let confirmDeleteBtn = document.getElementById("confirm-delete-btn")
 let cancelDeleteBtn = document.getElementById("cancel-delete-btn")
 
+// FILTER/SEARCH
+let searchInput = document.getElementById("search-input")
+let filterSelect = document.getElementById("filter-select")
+
+
 let cards = []
-// let addCardBtn = document.getElementById("add-card-btn")
 
 
 // -------------------------------------------------------------------------------------------
@@ -31,7 +35,7 @@ let cards = []
 
 
 //EVENT LISTENER
-document.addEventListener('DOMContentLoaded', renderCards);
+document.addEventListener('DOMContentLoaded', filterCards);
 
 addCardBtn.addEventListener("click", () => openModal());
 cancelCardBtn.addEventListener("click", closeModal)
@@ -71,7 +75,8 @@ cardForm.addEventListener("submit", e => {
         cards.unshift(newCard)
     }
     
-    renderCards()
+    // renderCards()
+    filterCards()
     closeModal()
 
 })
@@ -97,13 +102,14 @@ confirmDeleteBtn.addEventListener("click", () => {
 
 
 
-
+searchInput.addEventListener("input", filterCards)
+filterSelect.addEventListener("change", filterCards)
 
 /**
  * RENDER ALL CARDS FROM "CARDS" ARRAY ON TO MAIN DISPLAY
  */
 
-function renderCards(){
+function renderCards(cardToRender = cards){
     cardsContainer.innerHTML = "";
 
     if (cards.length === 0) {
@@ -112,10 +118,10 @@ function renderCards(){
         noCardMsg.classList.add("hidden");
     }
 
-    cards.forEach((card, index) => {
+    cardToRender.forEach((card, index) => {
         let cardElement = document.createElement("div");
         cardElement.classList.add("card-element");
-        cardElement.dataset.index = index;
+        cardElement.dataset.index = cards.indexOf(card);
 
         let formattedDate = card.date
             ? new Date(card.date).toLocaleString("en-US", {
@@ -151,8 +157,8 @@ function renderCards(){
             </div>
         `;
 
-    cardElement.querySelector(".edit-btn").addEventListener("click", () => openModal(index));
-    cardElement.querySelector(".delete-btn").addEventListener("click", () => openConfirmationModal(index));
+    cardElement.querySelector(".edit-btn").addEventListener("click", () => openModal(cards.indexOf(card)));
+    cardElement.querySelector(".delete-btn").addEventListener("click", () => openConfirmationModal(cards.indexOf(card)));
 
     cardsContainer.appendChild(cardElement);
     });
@@ -171,12 +177,12 @@ function deleteCard(index){
 
         setTimeout(() => {
             cards.splice(index, 1)
-            renderCards()
+            filterCards()
             closeConfirmationModal()
         }, 300)
     }else{
         cards.splice(index, 1)
-        renderCards()
+        filterCards()
         closeConfirmationModal()
     }
 }
@@ -267,7 +273,22 @@ function closeConfirmationModal(){
 
 
 
+// FILER/SEARCH
+function filterCards(){
+    let searchQuery = searchInput.value.toLowerCase()
+    let selectedCategoryForFilter = filterSelect.value
 
+
+    let filteredCards = cards.filter(card => {
+        let matchedSearch = card.title.toLowerCase().includes(searchQuery)
+
+        let matchedCategory = selectedCategoryForFilter === "All" || card.categories.includes(selectedCategoryForFilter)
+
+        return matchedSearch && matchedCategory
+    })
+
+    renderCards(filteredCards)
+}
 
 
 

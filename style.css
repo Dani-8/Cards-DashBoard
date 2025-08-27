@@ -275,22 +275,28 @@ body{
 
 
 /* CARD ELEMENT */
-.card-cont{
+.cards-main-cont{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* background-color: #0980a1; */
     border-radius: 12px;
     padding: 20px;
+}
+.card-cont{
+    /* background-color: #63cfec; */
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: center; */
-    align-items: end;
-    width: 80%;
+    justify-content: center;
+    width: 100%;
 }
 
 .card-element{
     background-color: white;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    width: 280px;
-    width: 23%;
+    width: 320px;
+    /* width: 23%; */
     /* min-height: 200px; */
     margin: 10px;
     padding: 20px;
