@@ -15,15 +15,29 @@ body{
 /* ----------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------- */
 /* ----------------------------------------------------------------------- */
-
-.header{
-    background-color: ;
+.container{
+    width: 100%;
+    /* background-color: rgb(153, 214, 250); */
 }
-
-
-
-
-
+.header{
+    /* background-color: lightcoral; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 0;
+    margin: 3rem 0;
+}
+.title{
+    font-size: 3.8rem;
+    font-weight: bold;
+    margin: 2rem 0;
+    color: rgb(4, 64, 79);
+}
+.subtitle{
+    font-size: 1.1rem;
+    color: rgb(50, 78, 78);
+}
 
 
 
