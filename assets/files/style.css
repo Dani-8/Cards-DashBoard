@@ -64,6 +64,35 @@ body{
     font-size: 25px;
 }
 
+
+/* NEW VERSION */
+.new-version-btn{
+    background-color: rgb(8, 126, 20);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.new-version-btn div{
+    background-color: rgb(135, 173, 253);
+    transition: .3s ease;
+    font-size: 17px;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.new-version-btn a{
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+}
+
 /* SEARCH & FILTER SECTION */
 /* SEARCH & FILTER SECTION */
 /* SEARCH & FILTER SECTION */
