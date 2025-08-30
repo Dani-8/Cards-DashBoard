@@ -69,27 +69,39 @@ body{
 .new-version-btn{
     background-color: rgb(8, 126, 20);
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     gap: 10px;
     padding: 10px;
     border-top-left-radius: 50px;
     border-bottom-left-radius: 50px;
+
+    width: 40px;
+    overflow: hidden;
+    transition: .3s ease;
+
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+}
+.new-version-btn:hover{
+    width: 200px;
 }
 
 .new-version-btn div{
-    background-color: rgb(135, 173, 253);
+    /* background-color: rgb(135, 173, 253); */
     transition: .3s ease;
     font-size: 17px;
-    margin: 0;
+    color: white;
 
     display: flex;
     justify-content: center;
     align-items: center;
+    white-space: nowrap;
 }
 .new-version-btn a{
     text-decoration: none;
-    color: white;
+    color: inherit;
     font-weight: 700;
 }
 
@@ -361,7 +373,7 @@ body{
     color: rgb(52, 52, 52);
 
 }
-.card-content > h2, p{
+.card-content > h2, p:not(.new-version-btn p){
     margin-bottom: 10px;
 }
 
