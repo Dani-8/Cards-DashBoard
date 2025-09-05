@@ -65,49 +65,6 @@ body{
 }
 
 
-/* NEW VERSION */
-.new-version-btn{
-    background-color: rgb(8, 126, 20);
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-
-    width: 40px;
-    overflow: hidden;
-    transition: .3s ease;
-
-    position: fixed;
-    bottom: 50px;
-    right: 0;
-}
-.new-version-btn:hover{
-    width: 200px;
-}
-
-.new-version-btn div{
-    /* background-color: rgb(135, 173, 253); */
-    transition: .3s ease;
-    font-size: 17px;
-    color: rgb(255, 255, 255);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-}
-.new-version-btn a{
-    text-decoration: none;
-    color: inherit;
-    font-weight: 700;
-}
-.new-version-btn i{
-cursor: pointer;
-}
-
 /* SEARCH & FILTER SECTION */
 /* SEARCH & FILTER SECTION */
 /* SEARCH & FILTER SECTION */
